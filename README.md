@@ -2,7 +2,43 @@
   A deep learning system that generates natural language descriptions of images using encoder-decoder architecture. A pretrained EfficientNet-B4 model acts as the visual encoder, extracting high-level spatial features from each input image. These features are projected into 512-dimensional visual tokens and passed to a two-layer Transformer decoder, which uses masked self-attention to model previously generated words and cross-attention to focus on relevant image regions. During inference, captions are generated word by word using beam search.
  
   The model is sized for ~8,091 images × 5 captions ≈ 40k caption/image pairs. Data is split into train / validation / test, with the test split held out and untouched during training — it is only ever used for final inference/evaluation, so the reported test score reflects genuine generalization rather than tuning against it.
- 
+
+---
+## Project Structure
+
+The repository separates the final implementation, experimental architectures, saved model artifacts and README images.
+
+```text
+.
+├── Assets/
+│   ├── image.png
+│   ├── image.Successes.png
+│   └── image.Failures.png
+│
+├── Experiments/
+│   ├── efficientnet-b4-transformer.ipynb
+│   ├── efficientnet-lstm.ipynb
+│   └── resnet50.ipynb
+│
+├── model/
+│   ├── config.json
+│   ├── vocab.pkl
+│   ├── test_captions.csv
+│   ├── encoder_best.pth
+│   ├── decoder_best.pth
+│   ├── encoder_best_bleu.pth
+│   ├── decoder_best_bleu.pth
+│   ├── encoder_final.pth
+│   └── decoder_final.pth
+│
+├── data_and_train.ipynb
+├── inference.ipynb
+├── instructions.md
+└── README.md
+```
+ All the information about the procedure of running notebooks is present in  `instructions.md` file.
+ The `model` directory contains the vocabulary, configuration, test split and trained checkpoints required by `inference.ipynb`.
+
 ---
 ## Data
 - ~8,091 images, 5 human-written captions per image.
@@ -17,7 +53,23 @@ train/val/test.
 | Training | 7,182 |
 | Validation | 809 |
 | Test | 100 |
+
 ---
+
+## Model Experiments
+
+Several encoder-decoder configurations were explored before selecting the final architecture.
+
+| Experiment | Description |
+|---|---|
+| `resnet50.ipynb` | Uses a pretrained ResNet-50 image encoder as an earlier visual-feature extraction baseline. |
+| `efficientnet-lstm.ipynb` | Combines EfficientNet visual features with an LSTM caption decoder. |
+| `efficientnet-b4-transformer.ipynb` | Combines EfficientNet-B4 with a Transformer decoder and represents the architecture used for the final model. |
+
+These experiments were used to compare different image encoders and caption decoders. The final system uses EfficientNet-B4 because of its strong pretrained visual features and a Transformer decoder because it can attend directly to all spatial image tokens while generating each word.
+
+---
+
 ## Architecture
   The system follows an encoder-decoder design where the encoder reads the image and the decoder generates the caption word by word.
 The data pipeline can be visualized in the following manner: 
