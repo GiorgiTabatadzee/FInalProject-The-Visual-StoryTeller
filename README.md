@@ -99,15 +99,17 @@ The model is trained and optimized using:
 
 ### Training Curves
 
-  ![Training curves](assets/image.png)
+  ![Training curves](Assets/image.png)
 
    The model's validation loss reached its minimum before the generation score reached its maximum. For this reason, separate checkpoints are saved for the best validation loss and the best caption-generation score.
 
 ### Successful Outputs
- ![Successful outputs](assets/image.Successes.png)
+ ![Successful outputs](Assets/image.Successes.png)
 
 ---
 ## Failure Analysis
    The model performs well on common scenes containing people, dogs, sports and outdoor activities. It has more difficulty with small objects, unusual scenes and images containing several objects.
 
-   ![Failure case examples](assets/image.Failures.png)
+   ![Failure case examples](Assets/image.Failures.png)
+
+   The observed failures mainly involve omitted secondary objects, incorrect object counts, confusion between visually similar objects and generic descriptions. The model usually identifies the dominant subject and general scene correctly, but it can lose small visual details. 
