@@ -20,7 +20,7 @@ train/val/test.
 ---
 ## Architecture
   The system follows an encoder-decoder design where the encoder reads the image and the decoder generates the caption word by word.
- 
+The data pipeline can be visualized in the following manner: 
 ```
 Image (380×380)
     ↓
@@ -98,8 +98,10 @@ Perplexity is calculated from the cross-entropy loss:
 It measures how uncertain the model is when predicting the next word given the correct previous context. Lower perplexity indicates stronger language-modeling performance.
 
 #### BLEU (Generation score)
--BLEU-1: measures how many individual words in the generated caption also appear in the human-written reference captions. A higher BLEU-1 score means the model selected more relevant words for the image.
--BLEU-4: measures overlap between sequences of up to four consecutive words, so it reflects phrase structure and fluency more strongly than BLEU-1. A higher BLEU-4 score means the generated caption more closely matches the wording and structure of the reference captions.
+- BLEU-1: measures how many individual words in the generated caption also appear in the human-written reference captions. A higher BLEU-1 score means the model selected more relevant words for the image.
+- BLEU-4: measures overlap between sequences of up to four consecutive words, so it reflects phrase structure and fluency more strongly than BLEU-1. A higher BLEU-4 score means the generated caption more closely matches the wording and structure of the reference captions.
+
+The following are the final metric results the model produced: 
 
 | Metric | Value |
 |---|---:|
@@ -118,8 +120,9 @@ It measures how uncertain the model is when predicting the next word given the c
 
 ### Successful Outputs
  ![Successful outputs](Assets/image.Successes.png)
-
+ 
   The model performs well on scenes containing people, dogs, sports and outdoor activities.
+  
 ---
 ## Failure Analysis
 
