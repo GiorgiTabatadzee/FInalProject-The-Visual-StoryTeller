@@ -16,7 +16,17 @@ All inference logic is already implemented inside the notebook. No code modifica
 
 ---
 
-## 2. Required Inputs
+## 2. Required Inputs for data_and_train notebook
+### Dataset 
+
+Upload `captions_data.zip`, containing:
+
+- Image dataset
+- Caption metadata used during inference
+
+After that just start session and click run all cells
+
+## 3. Required Inputs for inference notebook
 
 ### Dataset
 
@@ -45,7 +55,7 @@ Create a Kaggle Dataset named **`neededFiles`**, and upload *all* of the followi
 
 ---
 
-## 3. Attach Inputs in Kaggle
+## 4. Attach Inputs in Kaggle
 
 After uploading, click **Add Input** and attach:
 
@@ -120,7 +130,7 @@ Outputs a natural-language sentence using beam search.
 
 ## 8. Output Example
 
-The model generates captions such as:
+The inference notebook generates captions such as:
 
 - A man riding a bicycle on the street
 - A dog playing in the park
