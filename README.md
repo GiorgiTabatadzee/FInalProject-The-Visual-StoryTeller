@@ -88,6 +88,19 @@ The model is trained and optimized using:
  
 ---
 ## Results
+### Evaluation Metrics
+#### Cross-Entropy Loss
+Cross-entropy loss is computed using teacher forcing, where the decoder receives the correct previous words and predicts the next token. Padding positions are ignored during the calculation. Lower loss indicates that the model assigns higher probability to the correct next words.
+
+#### Perplexity (Teacher-Forced)
+Perplexity is calculated from the cross-entropy loss:
+`Perplexity = exp(loss)`
+It measures how uncertain the model is when predicting the next word given the correct previous context. Lower perplexity indicates stronger language-modeling performance.
+
+#### BLEU (Generation score)
+-BLEU-1: measures how many individual words in the generated caption also appear in the human-written reference captions. A higher BLEU-1 score means the model selected more relevant words for the image.
+-BLEU-4: measures overlap between sequences of up to four consecutive words, so it reflects phrase structure and fluency more strongly than BLEU-1. A higher BLEU-4 score means the generated caption more closely matches the wording and structure of the reference captions.
+
 | Metric | Value |
 |---|---:|
 | Best validation loss | 2.9679 |
@@ -106,9 +119,9 @@ The model is trained and optimized using:
 ### Successful Outputs
  ![Successful outputs](Assets/image.Successes.png)
 
+  The model performs well on scenes containing people, dogs, sports and outdoor activities.
 ---
 ## Failure Analysis
-   The model performs well on common scenes containing people, dogs, sports and outdoor activities. It has more difficulty with small objects, unusual scenes and images containing several objects.
 
    ![Failure case examples](Assets/image.Failures.png)
 
